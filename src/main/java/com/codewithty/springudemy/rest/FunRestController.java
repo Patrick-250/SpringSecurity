@@ -1,5 +1,7 @@
 package com.codewithty.springudemy.rest;
 
+import com.codewithty.springudemy.Couch;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +34,21 @@ public class FunRestController {
     @GetMapping("/sit")
     public String SaySit() {
         return "go ahead and sit";
+    }
+
+    //creating a constructor for dependencies injections
+    //first lets define a private field for the dependency
+    private Couch myCouch;
+    //creating a constructor for dependencies injections
+
+    @Autowired
+    public FunRestController(Couch couch) {
+        myCouch = couch;
+    }
+    @GetMapping("/dailyworkout")
+    public String getDailyWorkout() {
+        return myCouch.getDailyWorkout();
+
     }
 
 }
